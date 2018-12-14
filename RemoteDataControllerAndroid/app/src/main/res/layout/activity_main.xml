@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.itgowo.tool.remotedatacontroller.MainActivity">
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="清屏" />
+
+    <Button
+        android:id="@+id/startRDC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/clear"
+        android:text="启动远程调试" />
+
+    <Button
+        android:id="@+id/startLDC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/startRDC"
+        android:text="启动本地调试" />
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/startLDC"
+        android:text="关闭服务" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/stop"
+        android:id="@+id/openConsole"
+        android:text="打开控制台"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/openConsole"
+        android:padding="20dp"
+        android:autoLink="web"
+        android:scrollbars="vertical"
+        android:text="textview可以上下滑动（全屏）\r\n" />
+
+</RelativeLayout>
