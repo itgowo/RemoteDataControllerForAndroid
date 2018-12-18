@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.itgowo.tool.remotedatacontroller"
         minSdkVersion 19
@@ -24,6 +24,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.itgowo:RemoteDataControllerForAndroid:0.0.28'
+    implementation 'com.itgowo:RemoteDataControllerForAndroid:1.0.0'
     implementation 'com.alibaba:fastjson:1.1.67.android'
 }
