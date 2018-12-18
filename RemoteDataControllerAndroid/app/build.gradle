@@ -24,6 +24,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.itgowo:RemoteDataControllerForAndroid:1.0.0'
+    implementation 'com.itgowo:RemoteDataControllerForAndroid:1.0.1'
     implementation 'com.alibaba:fastjson:1.1.67.android'
 }
