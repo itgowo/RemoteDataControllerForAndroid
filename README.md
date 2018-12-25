@@ -1,14 +1,18 @@
-[RemoteDataControllerForAndroid](https://github.com/itgowo/RemoteDataControllerForAndroid)
+[GitHub](https://github.com/itgowo/RemoteDataControllerForAndroid)
 
 ### 一：开发环境
 Mac OS 10、Android Studio3.2.1
+### 二：介绍
+1. 基于互联网技术的效率工具。
+2. 提高开发与测试人员效率的辅助工具。
+3. 新人培训快速熟悉项目。
+4. 线上数据问题紧急修复工具。
 
-## 支持Android 7.0(API>=24)及以上的设备
-
+##### 提醒，库里不集成Json框架，利用反射查找项目内Json框架，优先使用FastJson其次Gson，其他暂不支持。如果写demo，请先引入任何一个支持的Json框架。
 ### 二：介绍
 1. 作为项目的核心项目，除了提供数据库管理、共享参数管理和文件管理外，还集成新版内置Http解析框架，增加远程服务框架，实现TCP长连接方案，解决粘包分包问题。三重认证连接保证授权安全，关闭本地调试开关状态下启动云控功能，本地服务虽然会被启动，但是只接受远程控制服务的命令，来自局域网的请求会被拒绝，安全保证+1。
 
-2. Android端项目可以独立运行，[第一版](https://github.com/hnsugar/android-debugdata-webtool)只支持局域网功能，这次云端版强化了很多功能。作为独立使用库，依然保持局域网访问功能，方便开发阶段调试。如果是上线应用，需要将本地功能关闭，需要使用时再打开本地服务，在云服务中，手机远程服务被启动后会启动本地服务，此时如果被禁止局域网访问，只有远程服务可以访问本地服务，极大保证安全性，不会被利用。
+2. Android端项目云端版可以独立运行，[第一版](https://github.com/hnsugar/android-debugdata-webtool)只支持局域网功能。作为独立使用库，依然保持局域网访问功能，方便开发阶段调试。如果是上线应用，需要将本地功能关闭，需要使用时再打开本地服务，在云服务中，手机远程服务被启动后会启动本地服务，默认只有远程服务可以访问本地服务，保证接口不被未授权使用。
 
 3. 内置[MiniHttpServer](https://www.jianshu.com/p/de98fa07140d)服务是自开发微型服务框架，支持解析Http报文信息，常见的如普通接口请求或者文件上传下载等都能正常识别，具体可看[MiniHttpServer](https://www.jianshu.com/p/de98fa07140d)。
 
@@ -25,7 +29,7 @@ Mac OS 10、Android Studio3.2.1
 ### 三：引入依赖
 
 ```
-    implementation 'com.itgowo:RemoteDataControllerForAndroid:0.0.11'
+    implementation 'com.itgowo:RemoteDataControllerForAndroid:1.0.1'
 ```
 
 ### 四：特点
@@ -92,6 +96,14 @@ DebugDataTool.initLocalServer(application, 8089, null);
         });
 ```
 ### 六：接入云控服务
+可以看库中[RDCConfigActivity](https://github.com/itgowo/RemoteDataControllerForAndroid/blob/master/RemoteDataControllerAndroid/RemoteDataControllerForAndroidLibrary/src/main/java/com/itgowo/tool/rdc/androidlibrary/RDCConfigActivity.java)演示，RDCConfigActivity.go(Context)可以直接跳转。
+界面上的TitleBar可以通过配置下面资源改变主题：
+ 
+```
+    <color name="remotetool_titlebar_backgroundcolor">#443333</color>
+    <color name="remotetool_titlebar_textcolor">#FFFFFF</color>
+    <dimen name="remotetool_titlebar_textsize">30sp</dimen>
+```
 ##### 1.RemoteInfo类为配置信息类如下：
 ```
 RemoteInfo remoteInfo1 = new RemoteInfo().setRemoteHost("rdc.itgowo.com").setRemoteServerPort(16671).setClientId(clientId).setToken(code).setLocalServerPort(-1).setContext(this);
@@ -105,6 +117,7 @@ RemoteInfo remoteInfo1 = new RemoteInfo().setRemoteHost("rdc.itgowo.com").setRem
 |localServerPort|Integer|-1|本地服务端口，为了安全请用-1，使用随机端口方式，端口号<1024则自动随机|
 
 ##### 2.初始化服务
+
 |参数|类型|举例|说明|
 |---|---|---|---|
 |remoteInfo1|RemoteInfo||远程服务配置信息|
@@ -117,6 +130,7 @@ String clientId = DebugDataTool.getRandomClientId();
 String token = DebugDataTool.getRandomToken();
 ```
 ##### 3.快速使用
+
 ```
 DebugDataTool.initRemoteServer(remoteInfo1,true, null);
 ```
@@ -222,32 +236,54 @@ DebugDataTool.initRemoteServer(remoteInfo1,true, null);
 4. 文件管理数据不支持分页，所以打开外部存储时第一次会很慢，以后会缓存较大目录的信息，从而提高响应速度。
 
 ### 十：简单图片例子，具体使用请看主项目
+![web-17.jpg](https://upload-images.jianshu.io/upload_images/3213604-4ebbaf4ae86e8c5f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![1.png](https://upload-images.jianshu.io/upload_images/3213604-c2e33ed04754c010.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-12.jpg](https://upload-images.jianshu.io/upload_images/3213604-4e0e67c769b68ebe.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![2.png](https://upload-images.jianshu.io/upload_images/3213604-812533f8f45eb9ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-13.jpg](https://upload-images.jianshu.io/upload_images/3213604-68bb15bfd45dc875.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![3.png](https://upload-images.jianshu.io/upload_images/3213604-0d0e096f87733b04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-14.jpg](https://upload-images.jianshu.io/upload_images/3213604-d053818f207f7ee3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![4.png](https://upload-images.jianshu.io/upload_images/3213604-a7840b2cd98e0965.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-15.jpg](https://upload-images.jianshu.io/upload_images/3213604-c5c2e7c6692a6779.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![5.png](https://upload-images.jianshu.io/upload_images/3213604-b04f400f3bf0b347.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-16.jpg](https://upload-images.jianshu.io/upload_images/3213604-a57dc9cb7f6239c1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![6.png](https://upload-images.jianshu.io/upload_images/3213604-9abb2f7c046e85fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-1.png](https://upload-images.jianshu.io/upload_images/3213604-b6fe0507f155e3a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![7.png](https://upload-images.jianshu.io/upload_images/3213604-e107e08a86a9c782.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-2.png](https://upload-images.jianshu.io/upload_images/3213604-f09e2595f80c0069.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![8.png](https://upload-images.jianshu.io/upload_images/3213604-74a2badbcef11926.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-3.png](https://upload-images.jianshu.io/upload_images/3213604-feb546a294ae50ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![9.png](https://upload-images.jianshu.io/upload_images/3213604-affc89cc04d01063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-4.png](https://upload-images.jianshu.io/upload_images/3213604-7b39b066b45d106b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![10.png](https://upload-images.jianshu.io/upload_images/3213604-07f1f32d56458a59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-5.png](https://upload-images.jianshu.io/upload_images/3213604-a1b948b955025e5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![11.png](https://upload-images.jianshu.io/upload_images/3213604-aea9808acd2b8955.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-6.png](https://upload-images.jianshu.io/upload_images/3213604-3dadfcd57764ca3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![12.png](https://upload-images.jianshu.io/upload_images/3213604-61a5e3ae56fd8490.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![app-7.png](https://upload-images.jianshu.io/upload_images/3213604-07a3ac96b7d583f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![13.png](https://upload-images.jianshu.io/upload_images/3213604-fb572860a7d02d24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![web-1.jpg](https://upload-images.jianshu.io/upload_images/3213604-dd192f6782b77ee4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-2.jpg](https://upload-images.jianshu.io/upload_images/3213604-11c7f4ece5321749.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-3.jpg](https://upload-images.jianshu.io/upload_images/3213604-1cf8a6b521d993be.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-4.jpg](https://upload-images.jianshu.io/upload_images/3213604-5db5abbdbab85b43.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-5.jpg](https://upload-images.jianshu.io/upload_images/3213604-14ca87699e2b2370.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-6.jpg](https://upload-images.jianshu.io/upload_images/3213604-b7f960bc35591d9f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-7.jpg](https://upload-images.jianshu.io/upload_images/3213604-d035732515258324.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-8.jpg](https://upload-images.jianshu.io/upload_images/3213604-2641fb229372191f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-9.jpg](https://upload-images.jianshu.io/upload_images/3213604-29cca589a435d1bb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-10.jpg](https://upload-images.jianshu.io/upload_images/3213604-0c68b32f74436a0b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![web-11.jpg](https://upload-images.jianshu.io/upload_images/3213604-5abadee852e46b6c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 
 
@@ -262,7 +298,7 @@ DebugDataTool.initRemoteServer(remoteInfo1,true, null);
 |[RemoteDataControllerForServer](https://github.com/itgowo/RemoteDataControllerForServer)|Java|[简书](https://www.jianshu.com/p/3858c7e26a98)|运行Java的设备|远程数据调试Server端|
 |[MiniHttpClient](https://github.com/itgowo/MiniHttpClient)|Java|[简书](https://www.jianshu.com/p/41b0917271d3)|运行Java的设备|精简的HttpClient|
 |[MiniHttpServer](https://github.com/itgowo/MiniHttpServer)|Java|[简书](https://www.jianshu.com/p/de98fa07140d)|运行Java的设备|支持部分Http协议的Server|
-|[MiniLongConnectionServer](https://github.com/itgowo/MiniLongConnectionServer)|Java|[简书](https://www.jianshu.com/p/4b993100eae5)|运行Java的设备|TCP长连接库，支持粘包拆包处理|
+|[MiniTCPClient](https://github.com/itgowo/MiniTCPClient)|Java|[简书](https://www.jianshu.com/p/4b993100eae5)|运行Java的设备|TCP长连接库，支持粘包拆包处理|
 |[PackageMessage](https://github.com/itgowo/PackageMessage)|Java|[简书](https://www.jianshu.com/p/8a4a0ba2f54a)|运行Java的设备|TCP粘包与半包解决方案|
 |[ByteBuffer](https://github.com/itgowo/ByteBuffer)|Java|[简书](https://www.jianshu.com/p/ba68224f30e4)|运行Java的设备|二进制处理工具类|
 |[DataTables.AltEditor](https://github.com/itgowo/DataTables.AltEditor)|JavaScript|[简书](https://www.jianshu.com/p/a28d5a4c333b)|浏览器|Web端表格编辑组件|
